@@ -3,3 +3,5 @@
 
 export const SITE_TITLE = 'shigatena - Portfolio';
 export const SITE_DESCRIPTION = 'Blog, Resume, Projects and more of shigatena';
+
+export const BUY_ME_COFFEE = "https://bmc.link/shigatena666"
