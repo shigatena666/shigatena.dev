@@ -1,0 +1,143 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TimeLineElement from "../components/resume/TimeLine.astro";
+import SkillElement from "../components/resume/Skill.astro";
+
+let skills = [
+  {icon: 'resume/python.png', label: 'Python'},
+  {icon: 'resume/c-sharp.png', label: 'C#'},
+  {icon: 'resume/github.png', label: 'GitHub'},
+  {icon: 'resume/burpsuite.png', label: 'Burpsuite'},
+  {icon: 'resume/metasploit.png', label: 'Metasploit'},
+  {icon: 'resume/kali.png', label: 'Kali Linux'},
+];
+let strengths = [
+  {icon: 'resume/adaptability.png', label: 'Adaptability'},
+  {icon: 'resume/responsibility.png', label: 'Responsibility'},
+  {icon: 'resume/stress.png', label: 'Stress management'},
+];
+let languages = [
+  {icon: 'resume/french.png', label: 'French (native)'},
+  {icon: 'resume/english.png', label: 'English (B2+, 935/990 TOEIC)'},
+  {icon: 'resume/spanish.png', label: 'Spanish (notions)'},
+  {icon: 'resume/portuguese.png', label: 'Portuguese (notions)'},
+];
+---
+
+<BaseLayout title="Resume" sideBarActiveItemID="resume">
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Profile</div>
+  </div>
+
+  <div class="mb-10 text-justify">
+    My journey in computer science and cyber-security has given me a strong foundation that I am
+    eager to use on solving real-world challenges. <br/>
+    I am highly motivated to continue expanding my knowledge and applying it in new and creative ways. <br/>
+    This drive to learn and grow is at the heart of my career.
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Experience</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="CISO Assistant - Apprenticeship"
+      subtitle="From Septembre 2021 to July 2024 at CNP Assurances, Issy-les-moulineaux, France"
+    >
+      <ul style={{ listStyleType: 'disc' }}>
+        <li>Engineered a database and Python-based automation scripts, boosting cyber-security infrastructure and operational efficiency.</li>
+        <li>Monitored Group security vulnerabilities and reporting key performance indicators (KPIs).</li>
+        <li>Orchestrated the 2022 Security Awareness Campaign, improving the cyber-security culture.</li>
+        <li>Contributed to the enhancement and configuration of advanced security tools.</li>
+      </ul>
+    </TimeLineElement>
+
+    <TimeLineElement
+      title="PHP Developer - Internship"
+      subtitle="From April 2021 to June 2021 at CalculIP, Villetaneuse, France"
+      link="https://github.com/shigatena666/CalculIP"
+    >
+      <ul style={{ listStyleType: 'disc' }}>
+        <li>Performed in-depth case studies to streamline project requirements.</li>
+        <li>Refactored code within an MVC architecture, improving software reliability and maintainability.</li>
+        <li>Developed and improved network protocol exercises (DHCP, DNS, IPv6) to enhance user understanding.</li>
+        <li>Resolved critical vulnerabilities including XSS and IDORs.</li>
+      </ul>
+    </TimeLineElement>
+
+    <TimeLineElement
+      title="Java Developer - Tutored project"
+      subtitle="From October 2020 to January 2021 at 1clic1prof, Villetaneuse, France"
+      link="https://github.com/shigatena666/1clic1prof-app"
+    >
+      <ul style={{ listStyleType: 'disc' }}>
+        <li>Created project specifications to guide development and align with the client's needs.</li>
+        <li>Managed projects proficiently using Gantt and Pert diagrams along with Agile methodologies.</li>
+        <li>Designed and implemented server-side logic for a client/server Android application, emphasizing secure data transmission.</li>
+      </ul>
+    </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Education</div>
+  </div>
+
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+        title="Cyber-security engineer - Apprenticeship"
+        subtitle="September 2021 to June 2024 at ESILV, La Défense, France"
+    >
+      <ul style={{ listStyleType: 'disc' }}>
+        <li>Core competency: Computer science, Internet of Things and Cyber-security.</li>
+        <li>Member of the DaVinciCode ESILV's cyber-security association.</li>
+      </ul>
+    </TimeLineElement>
+    <TimeLineElement
+        title="Computer science BTEC Higher National Diploma - Initial training"
+        subtitle="September 2019 to June 2021 at the Technological University Institute (IUT) of Villetaneuse, Villetaneuse, France"
+    >
+      <ul style={{ listStyleType: 'disc' }}>
+        <li>Specialization: Advanced mathematics.</li>
+      </ul>
+    </TimeLineElement>
+    <TimeLineElement
+        title="Scientific high school baccalaureate - Initial training"
+        subtitle="September 2016 to June 2019 at Saint-Exupery high school, Mantes-la-jolie, France"
+    >
+      <ul style={{ listStyleType: 'disc' }}>
+        <li>Specialization: Computer and numeric science.</li>
+      </ul>
+    </TimeLineElement>
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Skills</div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 mb-10">
+      {skills.map(skill => (
+          <SkillElement icon={skill.icon} label={skill.label} />
+      ))}
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Strengths</div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 mb-10">
+    {strengths.map(skill => (
+        <SkillElement icon={skill.icon} label={skill.label} />
+    ))}
+  </div>
+
+  <div class="mb-5">
+    <div class="text-3xl w-full font-bold">Languages</div>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 mb-10">
+    {languages.map(skill => (
+        <SkillElement icon={skill.icon} label={skill.label} />
+    ))}
+  </div>
+</BaseLayout>

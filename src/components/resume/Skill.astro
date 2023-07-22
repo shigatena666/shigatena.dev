@@ -1,0 +1,18 @@
+---
+const { icon, label } = Astro.props;
+---
+
+<div class="flex items-center">
+    <div class="skill__icon" style={{
+        height: "20px",
+        width: "20px",
+        backgroundImage: `url(${icon})`,
+        backgroundSize: 'contain',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center'
+    }}>
+    </div>
+    <div class="skill__label ml-2">
+        <p>{label}</p>
+    </div>
+</div>

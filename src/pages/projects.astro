@@ -5,47 +5,51 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 
 <BaseLayout title = "Projects" sideBarActiveItemID="projects">
   <div>
-    <div class="text-3xl w-full font-bold mb-5">Projects Header</div>
+    <div class="text-3xl w-full font-bold mb-5">Last projects</div>
   </div>
 
   <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+      title="Basic keylogger"
+      img="/post_img.webp"
+      desc="A simple keylogger written in Python, using RSA to communicate between the client and the server."
+      url="https://github.com/shigatena666/small-keylogger"
+      badge="New"
+      tags={['Python']}
   />
 
   <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Projects Header</div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Older projects</div>
   </div>
 
   <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
+      title="K-Means implementation"
+      img="/post_img.webp"
+      desc="Implementation of the K-means algorithm, allowing to choose for an input file and variables to output in matplotlib."
+      url="https://github.com/shigatena666/ESILV-Python-K-means"
+      tags={['Python', 'AI']}
   />
   <div class="divider my-0"></div>
   <HorizontalCard
-    title="Demo Project 4"
+    title="Tic-Tac-Toe and Connect-4 solver"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+    desc="AI that can battle against an human on the Tic-Tac-Toe game and also on the Connect 4."
+    url="https://github.com/shigatena666/ESILV-A3-Final-Project"
+    tags={['Python', 'AI']}
   />
   <div class="divider my-0"></div>
   <HorizontalCard
-    title="Demo Project 5"
+    title="CalculIP - Network training courses"
     img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+    desc="Web project which aims to provide students an environment where they can practice networking related exercises: frame analysis, conversions and many other subject."
+    url="https://github.com/shigatena666/CalculIP"
+    tags={['PHP', 'Networking']}
+  />
+  <div class="divider my-0"></div>
+  <HorizontalCard
+    title="1clic1prof - Mobile application"
+    img="/post_img.webp"
+    desc="Connect students and teachers. Project made for the start-up 1clic1prof."
+    url="https://github.com/shigatena666/1clic1prof-app"
+    tags={['Java', 'Android']}
   />
 </BaseLayout>
