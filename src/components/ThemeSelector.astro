@@ -46,7 +46,8 @@
             </div>
           </div>
         </div>
-      </div><div
+      </div>
+      <div
         class="outline-base-content overflow-hidden rounded-lg outline-2 outline-offset-2"
         data-set-theme="dark"
         data-act-class="outline"
@@ -597,7 +598,7 @@
   if (theme) {
     updateTheme(theme);
   } else {
-    updateTheme("lofi");
+    updateTheme("light");
   }
 
   theme_selectors.forEach((selector) => {
@@ -609,5 +610,14 @@
   function updateTheme(newTheme) {
     document.querySelector("html").setAttribute("data-theme", newTheme);
     window.localStorage.setItem("data-theme", newTheme);
+
+    theme_selectors.forEach((selector) => {
+      selector.parentElement.classList.remove('outline');
+    });
+    
+    const active_theme_selector = document.querySelector(`#theme-selector div[data-theme="${newTheme}"]`);
+    if (active_theme_selector && active_theme_selector.parentNode) {
+      active_theme_selector.parentElement.classList.add('outline');
+    }
   }
 </script>
