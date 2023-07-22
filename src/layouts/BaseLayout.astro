@@ -4,13 +4,13 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import '@fontsource/ubuntu-mono';
-import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import { TITLE_TEMPLATE, SITE_DESCRIPTION, DEFAULT_THEME } from "../config";
 
-const { image, title = SITE_TITLE, description = SITE_DESCRIPTION, includeSidebar = true, sideBarActiveItemID } = Astro.props;
+const { image, title = TITLE_TEMPLATE, description = SITE_DESCRIPTION, includeSidebar = true, sideBarActiveItemID } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" data-theme="lofi">
+<html lang="en" data-theme={DEFAULT_THEME}>
   <head>
     <BaseHead title={title} description={description} image={image} />
   </head>
@@ -18,7 +18,7 @@ const { image, title = SITE_TITLE, description = SITE_DESCRIPTION, includeSideba
     <div class="bg-base-100 drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content bg-base-100">
-        <Header title={SITE_TITLE} sideBar={includeSidebar} />
+        <Header title={TITLE_TEMPLATE + "Portfolio"} sideBar={includeSidebar} />
         <div class="md:flex md:justify-center">
           <main class="p-6 pt-10 lg:pt-0 lg:max-w-[900px] max-w-[100vw]">
             <slot />

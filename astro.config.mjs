@@ -8,7 +8,7 @@ import image from "@astrojs/image";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://shigatena.netlify.app/',
+  site: 'https://shigatena.dev/',
   integrations: [mdx(), sitemap(), tailwind(), image(
     {
       serviceEntryPoint: '@astrojs/image/sharp',

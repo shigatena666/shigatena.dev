@@ -3,6 +3,7 @@ import { BlogSchema } from "../content/config";
 import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import {TITLE_TEMPLATE} from "../config";
 
 export interface Props extends BlogSchema {}
 
@@ -13,7 +14,7 @@ const displayDate = dayjs(pubDate).format("ll");
 import { Image } from "@astrojs/image/components";
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}>
+<BaseLayout title={TITLE_TEMPLATE + title} description={description} image={heroImage}>
   <main class="md:flex md:justify-center">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
       {

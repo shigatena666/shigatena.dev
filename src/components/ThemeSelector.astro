@@ -1,3 +1,7 @@
+---
+import { DEFAULT_THEME } from "../config";
+---
+
 <div title="Change Theme" class="dropdown dropdown-end" id="theme-selector">
   <div tabindex="0" class="btn gap-1 normal-case btn-ghost">
     <svg
@@ -598,7 +602,7 @@
   if (theme) {
     updateTheme(theme);
   } else {
-    updateTheme("light");
+    updateTheme(DEFAULT_THEME);
   }
 
   theme_selectors.forEach((selector) => {
