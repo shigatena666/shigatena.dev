@@ -2,7 +2,7 @@
 title: "Bomb Labs"
 description: "Write up of the phase 6 and secret phase of the CSAPP Bomb Labs."
 pubDate: "Sep 10 2022"
-heroImage: "/post_img.webp"
+heroImage: "/csapp-bomb-labs-phase-6-and-secret/ghidra_output_6.png"
 ---
 
 # Introduction
