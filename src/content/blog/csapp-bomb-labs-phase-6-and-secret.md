@@ -7,7 +7,6 @@ heroImage: "/csapp-bomb-labs-phase-6-and-secret/ghidra_output_6.png"
 
 # Introduction
 
-Our teacher gave us the bomb labs to complete. The aim was to get a better understanding of the assembler and reverse-engineering.
 For those challenges I used [Ghidra](https://github.com/NationalSecurityAgency/ghidra) altogether with [OnlineGDB](https://www.onlinegdb.com/online_c_compiler) until phase 6 where I started using [gdb](https://www.sourceware.org/gdb/).
 The first 5 challenges were relatively easy so I didn't take notes for those. However, phase 6 and the secret phase were quite interesting, so I took some notes.
 
