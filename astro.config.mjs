@@ -10,7 +10,7 @@ import simpleStackForm from "simple-stack-form";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "shigatena-dev.vercel.app",
+  site: "https://shigatena-dev.vercel.app",
   integrations: [
     mdx({
       syntaxHighlight: "shiki",
