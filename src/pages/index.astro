@@ -1,0 +1,50 @@
+---
+import MainLayout from "@/layouts/main-layout.astro";
+import { Image } from "astro:assets";
+import { hobbies } from "@/config/about.ts";
+import { Button } from "@/components/ui/button";
+import { Icon } from "astro-icon/components";
+---
+
+<MainLayout title="about" description="Lorem ipsum dolor sit amet">
+  <section class="space-y-5">
+    <section
+      class="relative container max-w-screen-md mb-28 mt-16 sm:mt-20 lg:mt-28"
+    >
+      <div class="flex h-full flex-col justify-center items-center">
+        <div class="grid gap-8 sm:grid-cols-2">
+          <div class="flex justify-center">
+            <Image
+              class="h-full w-auto object-cover overflow-hidden rounded-xl"
+              src={hobbies[0].image}
+              alt={hobbies[0].alt}
+              width={800}
+              height={1226}
+              loading="eager"
+            />   
+          </div>
+          <div class="flex flex-col items-center sm:items-start">
+            <h1 class="text-4xl font-heading text-foreground text-center sm:text-left">Violette</h1>
+            <p class="text-base text-muted-foreground mt-0.5 text-center sm:text-left">
+              cybersecurity expert
+            </p>
+            <p class="mb-12 mt-12 text-base text-muted-foreground text-center sm:text-left">
+              hi ! i'm Violette, i love offensive security and i'm always eager to learn more
+            </p>
+            <div class="flex flex-col sm:flex-row items-center gap-3">
+              <Button variant="outline" className="rounded-xl">
+                <Icon name="lucide:mail" class="mr-2 size-4" />
+                <a href="mailto:">contact</a>
+              </Button>
+
+              <Button variant="outline" className="rounded-xl">
+                <Icon name="lucide:briefcase" class="mr-2.5 size-4" />
+                <a href="https://mickasmt.com/" target="_blank">projects</a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</MainLayout>

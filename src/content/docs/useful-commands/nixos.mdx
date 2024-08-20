@@ -1,0 +1,26 @@
+---
+title: NixOS
+description: Useful NixOS commands.
+---
+
+# Compiling Home
+
+- home-manager switch --flake .#saturn
+- home-manager switch --flake .#sun
+
+# Compiling Nix
+
+- sudo nixos-rebuild switch
+
+# SOPS
+
+- sops --encrypt --in-place --pgp PGP .secrets/secrets.yaml
+- sops --decrypt secrets.yaml
+
+# dconf2nix
+
+- dconf dump / | dconf2nix > dconf.nix
+
+# Mounted folder to Proton Drive using rclone
+
+rclone mount proton: ~/Proton/ --vfs-cache-mode full --allow-non-empty

