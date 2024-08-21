@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
   url: "https://astro-nomy.vercel.app",
   ogImage: "https://astro-nomy.vercel.app/og.jpg",
   links: {
-    linkedin: "https://twitter.com/shigatena666",
+    linkedin: "",
     github: "https://github.com/shigatena666",
   },
 };

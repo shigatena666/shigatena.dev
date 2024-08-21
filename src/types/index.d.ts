@@ -44,6 +44,11 @@ export type DocsConfig = {
   sidebarNav: SidebarNavItem[];
 };
 
+export type ResumeConfig = {
+  mainNav: MainNavItem[];
+  sidebarNav: SidebarNavItem[];
+};
+
 export type MarketingConfig = {
   mainNav: MainNavItem[];
 };

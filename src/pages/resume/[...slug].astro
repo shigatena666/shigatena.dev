@@ -1,0 +1,80 @@
+---
+import { MdxComponents } from "@/components/content/mdx-components";
+import DocsSidebarNav from "@/components/layout/sidebar-nav.astro";
+import DocsPageHeader from "@/components/page-header.astro";
+import DocsPager from "@/components/resume-pager.astro";
+import { DashboardTableOfContents } from "@/components/toc";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { resumeConfig } from "@/config/resume";
+import ResumeLayout from "@/layouts/resume-layout.astro";
+import { getTableOfContents } from "@/lib/toc";
+import { Icon } from "astro-icon/components";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const resume = await getCollection("resume");
+  return resume.map((resume) => ({
+    params: { slug: resume.slug },
+    props: resume,
+  }));
+}
+
+type Props = CollectionEntry<"resume">;
+
+const resume = Astro.props;
+const slug = Astro.params.slug;
+const toc = await getTableOfContents(resume.body);
+
+const { Content } = await resume.render();
+
+if (!slug || !resume) {
+  return new Response(null, {
+    status: 404,
+    statusText: "Not found",
+  });
+}
+---
+
+<ResumeLayout title={resume.data.title} description={resume.data.description}>
+  <div class="container flex-1">
+    <div
+      class="flex-1 md:grid md:grid-cols-[220px_1fr] md:gap-6 lg:grid-cols-[240px_1fr] lg:gap-10"
+    >
+      <aside
+        class="fixed top-14 z-30 -ml-2 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 md:sticky md:block"
+      >
+        <ScrollArea className="h-full py-6 pr-6 lg:py-8" client:load>
+          <DocsSidebarNav items={resumeConfig.sidebarNav} />
+        </ScrollArea>
+      </aside>
+      <main
+        class="relative py-6 lg:gap-10 lg:py-8 xl:grid xl:grid-cols-[1fr_300px]"
+      >
+        <div class="mx-auto w-full min-w-0">
+          <div class="mb-4 flex items-center space-x-1 text-sm text-muted-foreground">
+            <div class="truncate">Resume</div>
+            <Icon name="lucide:chevron-right" class="size-4" />
+            <div class="font-medium text-foreground">{resume.data.title}</div>
+          </div>
+
+          <DocsPageHeader
+            heading={resume.data.title}
+            text={resume.data.description}
+          />
+
+          <Content components={MdxComponents} />
+
+          <hr class="my-4 md:my-6" />
+          <DocsPager slug={resume.slug} />
+        </div>
+        <div class="hidden text-sm xl:block">
+          <div
+            class="sticky top-18 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10"
+          >
+            <DashboardTableOfContents toc={toc} client:load />
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</DocsLayout>

@@ -14,19 +14,13 @@ export const navMenuConfig: NavMenuConfig = {
     },
     {
       title: "Documentation",
-      href: "/docs/welcome",
+      href: "/docs/welcome/",
       description: "Documentation button",
       image: "",
     },
     {
-      title: "Projects",
-      href: "/projects",
-      description: "Projects button",
-      image: "",
-    },
-    {
       title: "Resume",
-      href: "/resume",
+      href: "/resume/work/",
       description: "Resume button",
       image: "",
     },

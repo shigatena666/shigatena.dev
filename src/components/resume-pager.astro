@@ -1,18 +1,18 @@
 ---
 import { buttonVariants } from "@/components/ui/button";
-import { docsConfig } from "@/config/docs";
+import { resumeConfig } from "@/config/resume";
 import { cn } from "@/lib/utils";
 import { Icon } from "astro-icon/components";
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-  slug: CollectionEntry<"docs">["slug"];
+  slug: CollectionEntry<"resume">["slug"];
 };
 
 export function getPagerForDoc(slug: string) {
-  const flattenedLinks = [...flatten(docsConfig.sidebarNav)];
+  const flattenedLinks = [...flatten(resumeConfig.sidebarNav)];
   let activeIndex = flattenedLinks.findIndex(
-    (link) => `/docs/${slug}/` === link?.href
+    (link) => `/resume/${slug}/` === link?.href
   );
 
   activeIndex = Math.max(activeIndex, 0);

@@ -27,20 +27,11 @@ const docs = defineCollection({
   }),
 });
 
-const resumes = defineCollection({
-  // Type-check frontmatter using a schema
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      versionNumber: z.string(),
-      image: z.object({
-        src: image(),
-        alt: z.string(),
-      }),
-      // Transform string to Date object
-      date: z.date({ coerce: true }),
-    }),
+const resume = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+  }),
 });
 
-export const collections = { blog, docs, resumes };
+export const collections = { blog, docs, resume };
