@@ -21,11 +21,11 @@ export const resumeConfig: ResumeConfig = {
         },
         {
           title: "Skills",
-          href: "",
+          href: " ",
         },
         {
           title: "Hobbies",
-          href: "",
+          href: " ",
         },
       ],
     },
