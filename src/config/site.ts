@@ -4,8 +4,8 @@ export const siteConfig: SiteConfig = {
   name: "shigatena",
   description:
     "Own personal website using Astro-nomy",
-  url: "https://astro-nomy.vercel.app",
-  ogImage: "https://astro-nomy.vercel.app/og.jpg",
+  url: "https://shigatena.dev",
+  ogImage: "https://shigatena.dev/og.png",
   links: {
     linkedin: "",
     github: "https://github.com/shigatena666",
