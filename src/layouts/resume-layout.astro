@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "./base-layout.astro";
 import { SheetMobileNav } from "@/components/layout/sheet-mobile-nav";
 import { navMenuConfig } from "@/config/nav-menu";
-import { docsConfig } from "@/config/docs";
+import { resumeConfig } from "@/config/resume";
 import { ThemeToggle } from "@/components/theme-toggle";
 // import MainNav from "@/components/layout/main-nav.astro";
 
@@ -36,7 +36,7 @@ const { title, description } = Astro.props;
       sidebarNavItems={[
         ...navMenuConfig.pagesNav,
         ...navMenuConfig.examplesNav,
-        ...docsConfig.sidebarNav,
+        ...resumeConfig.sidebarNav,
       ]}
       slot="mobile-nav-header"
       client:load
