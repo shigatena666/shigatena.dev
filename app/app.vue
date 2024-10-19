@@ -40,11 +40,7 @@ useSeoMeta({
   ogTitle: appConfig.appName,
   ogSiteName: 'shigatena',
   ogUrl: () => runtimeConfig.public.siteUrl,
-  ogLocale: () => locale.value,
-  twitterTitle: appConfig.appName,
-  twitterCard: 'summary_large_image',
-  twitterSite: appConfig.twitterUsername,
-  twitterCreator: appConfig.twitterUsername,
+  ogLocale: () => locale.value
 })
 </script>
 
