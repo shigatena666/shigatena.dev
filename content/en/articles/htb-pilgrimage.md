@@ -7,7 +7,7 @@ image: "https://shigatena.dev/articles/htb_pilgrimage.png"
 readingTime: "10"
 ---
 
-![preview](https://www.it-connect.fr/wp-content-itc/uploads/2023/11/Pilgrimage-800x606.png)
+![preview](https://shigatena.dev/articles/htb_pilgrimage.png)
 
 ## Initial Setup
 

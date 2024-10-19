@@ -7,7 +7,7 @@ image: "https://shigatena.dev/articles/htb_sau.png"
 readingTime: "10"
 ---
 
-![preview](https://www.it-connect.fr/wp-content-itc/uploads/2023/12/hackthebox-writeup-sau.png)
+![preview](https://shigatena.dev/articles/htb_sau.png)
 
 ## Initial Reconnaissance
 

@@ -7,7 +7,7 @@ image: "https://shigatena.dev/articles/htb_monitorstwo.png"
 readingTime: "10"
 ---
 
-![preview](https://miro.medium.com/v2/resize:fit:1400/1*fGQbeX4aQAe3lLtaRX02tQ.png)
+![preview](https://shigatena.dev/articles/htb_monitorstwo.png)
 
 ## Initial Reconnaissance
 
