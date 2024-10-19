@@ -5,15 +5,6 @@ defineProps({
     required: true,
   },
 })
-
-function handleError() {
-  clearError({ redirect: '/' })
-}
-
-function goBack() {
-  clearError()
-  useRouter().back()
-}
 </script>
 
 <template>

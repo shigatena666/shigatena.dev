@@ -5,7 +5,6 @@ const { locale } = useI18n()
 
 const searchedTags = ref<string[]>([])
 const searchedTitle = ref('')
-const showSearch = ref(true)
 
 const { data } = await useAsyncData('articles', () =>
   queryContent('/articles')
@@ -42,17 +41,12 @@ const toggleTag = (tag: string) => {
       <ContentSlot :use="$slots.subtitle" />
     </h2>
     <Divider class="mb-8 mt-2" />
-    <div :class="showSearch ? '' : 'mb-3'">
-      <span
-        class="font-newsreader  text-white-shadow cursor-pointer select-none text-lg"
-        @click="showSearch = !showSearch"
-      >
-        {{ showSearch ? $t("writing.hide_search") : $t("writing.show_search") }}
-      </span>
-    </div>
-    <div
-      v-if="showSearch"
-      class="mb-4 flex flex-col gap-2"
+    <span
+      class="font-newsreader text-white-shadow select-none text-lg"
+    >
+      Search
+    </span>
+    <div class="mb-4 flex flex-col gap-2"
     >
       <div class="my-4">
         <UInput
