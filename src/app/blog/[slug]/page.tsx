@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Button, Column, Flex, Heading, Row, SmartImage, Text } from "@/once-ui/components";
+import { AvatarGroup, Badge, Button, Column, Flex, Heading, Row, SmartImage, Text } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { about, person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
@@ -133,9 +133,16 @@ export default function Blog({ params }: BlogParams) {
         )}
         <Column gap="l">
           <Column gap="m">
-            <Text variant="body-default-s" color="neutral-faded">
-              {formatDate(post.metadata.publishedAt)}
-            </Text>
+            <Badge
+              arrow={false}
+              effect={false}
+              border="success-alpha-strong"
+              background="success-alpha-weak"
+              >
+              <Text variant="body-default-s" color="neutral-faded">
+                {formatDate(post.metadata.publishedAt)}
+              </Text>
+            </Badge>
             <Heading as="h1" variant="display-strong-l">
               {post.metadata.title}
             </Heading>
