@@ -1,6 +1,11 @@
-export { Header } from "@/components/Header";
-export { Footer } from "@/components/Footer";
-export { Mailchimp } from "@/components/Mailchimp";
-export { ProjectCard } from "@/components/ProjectCard";
-export { HeadingLink } from "@/components/HeadingLink";
-export { RouteGuard } from "@/components/RouteGuard";
+export { Header } from './Header/Header';
+export { Footer } from './Footer/Footer';
+export { DiscordPresence } from './DiscordPresence/DiscordPresence';
+export { TableOfContents } from './TableOfContents/TableOfContents';
+export { ProjectCard } from './ProjectCard/ProjectCard';
+export { Availability } from './Availability/Availability';
+export { HeadingLink } from './HeadingLink/HeadingLink';
+export { Mailchimp } from './Mailchimp/Mailchimp';
+export { ScrollToHash } from './ScrollToHash/ScrollToHash';
+export { RouteGuard } from './RouteGuard/RouteGuard';
+export { GithubCalendar } from './GithubCalendar/GithubCalendar';

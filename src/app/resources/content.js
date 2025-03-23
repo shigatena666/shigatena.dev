@@ -12,15 +12,9 @@ const person = {
   languages: ["English", "French"], // optional: Leave the array empty if you don't want to display languages
 };
 
-const newsletter = {
-  display: false,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: (
-    <>
-      I occasionally write about design, technology, and share thoughts on the intersection of
-      creativity and engineering.
-    </>
-  ),
+const githubCalendar = {
+  display: true,
+  username: "shigatena666",
 };
 
 const social = [
@@ -310,4 +304,4 @@ const availability = {
   notAvailableText: "Not available",
 }; 
 
-export { person, social, newsletter, home, about, blog, work, gallery, documentation, availability};
+export { person, githubCalendar, social, home, about, blog, work, gallery, documentation, availability};

@@ -1,5 +1,5 @@
 import { Column, Flex, Heading, LetterFx } from "@/once-ui/components";
-import MasonryGrid from "@/components/gallery/MasonryGrid";
+import MasonryGrid from "@/components/Gallery/MasonryGrid";
 import { baseURL } from "@/app/resources";
 import { gallery, person } from "@/app/resources/content";
 

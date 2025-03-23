@@ -1,15 +1,15 @@
 import React from "react";
 
 import { Heading, Flex, Text, Button, Avatar, Arrow, Column, LetterFx } from "@/once-ui/components";
-import { Projects } from "@/components/work/Projects";
-import { Availability } from "@/components/Availability";
+import { Projects } from "@/components/Work/Projects";
+import { Availability } from "@/components/Availability/Availability";
 import { getPosts } from "@/app/utils/utils";
 
 import { baseURL, routes } from "@/app/resources";
-import { home, about, person, newsletter } from "@/app/resources/content";
+import { home, person, githubCalendar } from "@/app/resources/content";
 import { availability } from "@/app/resources/content";
-import { Mailchimp } from "@/components";
-import { Posts } from "@/components/blog/Posts";
+import { Posts } from "@/components/Blog/Posts";
+import { GithubCalendar } from "@/components/GithubCalendar";
 
 export async function generateMetadata() {
   const title = home.title;
@@ -110,7 +110,20 @@ export default function Home() {
           </Flex>
         </Flex>
       )}
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
+      {githubCalendar.display && (
+        <Flex fillWidth direction="column" gap="24" mobileDirection="column">
+        <Flex flex={1} paddingLeft="l">
+          <Heading as="h2" variant="display-strong-xs" wrap="balance">
+            <LetterFx speed="slow" trigger="instant">
+              Github contributions
+            </LetterFx>
+          </Heading>
+        </Flex>
+        <Flex horizontal="center">
+          <GithubCalendar username={githubCalendar.username} />
+        </Flex>
+      </Flex>
+      )}
     </Column>
   );
 }

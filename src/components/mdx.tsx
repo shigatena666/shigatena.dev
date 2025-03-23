@@ -142,13 +142,16 @@ const components = {
   CodeBlock,
 };
 
-type CustomMDXProps = MDXRemoteProps & {
+type CustomMDXProps = {
+  source: string;
   components?: typeof components;
 };
 
-export function CustomMDX(props: CustomMDXProps) {
+export function CustomMDX({ source, components: customComponents }: CustomMDXProps) {
   return (
-    // @ts-ignore: Suppressing type error for MDXRemote usage
-    <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />
+    <MDXRemote
+      source={source}
+      components={{ ...components, ...(customComponents || {}) }}
+    />
   );
 }

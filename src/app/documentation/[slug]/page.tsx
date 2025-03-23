@@ -5,8 +5,8 @@ import { AvatarGroup, Button, Column, Heading, Row, Text } from "@/once-ui/compo
 import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
-import ScrollToHash from "@/components/ScrollToHash";
-import TableOfContents from "@/components/TableOfContents";
+import { ScrollToHash } from "@/components/ScrollToHash";
+import { TableOfContents } from "@/components/TableOfContents";
 import { useMemo } from "react";
 
 interface BlogParams {

@@ -5,7 +5,7 @@ import { AvatarGroup, Badge, Button, Column, Flex, Heading, Row, SmartImage, Tex
 import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
-import ScrollToHash from "@/components/ScrollToHash";
+import { ScrollToHash } from "@/components/ScrollToHash";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -119,50 +119,48 @@ export default function Project({ params }: WorkParams) {
           }),
         }}
       />
-      <Column gap="xl">
-        {post.metadata.images.length > 0 && (
-          <SmartImage
-            priority
-            aspectRatio="16 / 9"
-            radius="m"
-            alt="image"
-            src={post.metadata.images[0]}
-          />
-        )}
-        <Column gap="l">
-          <Column gap="m">
-            <Badge
-              arrow={false}
-              effect={false}
-              border="success-alpha-strong"
-              background="success-alpha-weak"
-              >
-              <Text variant="body-default-s" color="neutral-faded">
-                {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
-              </Text>
-            </Badge>
-            <Heading as="h1" variant="display-strong-l">
-              {post.metadata.title}
-            </Heading>
-            {post.metadata.summary && (
-              <Text variant="body-default-l" color="neutral-faded">
-                {post.metadata.summary}
-              </Text>
-            )}
-          </Column>
-          {avatars.length > 0 && (
-            <Row gap="s" vertical="center">
-              <AvatarGroup avatars={avatars} size="s" />
-              <Text variant="body-default-s" color="neutral">
-                {post.metadata.team?.map((person) => person.name).join(", ")}
-              </Text>
-            </Row>
+      {post.metadata.images?.length > 0 && (
+        <SmartImage
+          priority
+          aspectRatio="16 / 9"
+          radius="m"
+          alt="image"
+          src={post.metadata.images[0]}
+        />
+      )}
+      <Column gap="l">
+        <Column gap="m">
+          <Badge
+            arrow={false}
+            effect={false}
+            border="success-alpha-strong"
+            background="success-alpha-weak"
+          >
+            <Text variant="body-default-s" color="neutral-faded">
+              {post.metadata.publishedAt && formatDate(post.metadata.publishedAt)}
+            </Text>
+          </Badge>
+          <Heading as="h1" variant="display-strong-l">
+            {post.metadata.title}
+          </Heading>
+          {post.metadata.summary && (
+            <Text variant="body-default-l" color="neutral-faded">
+              {post.metadata.summary}
+            </Text>
           )}
         </Column>
-        <Column maxWidth="m">
-          <ScrollToHash />
-          <CustomMDX source={post.content} />
-        </Column>
+        {avatars.length > 0 && (
+          <Row gap="s" vertical="center">
+            <AvatarGroup avatars={avatars} size="s" />
+            <Text variant="body-default-s" color="neutral">
+              {post.metadata.team?.map((person) => person.name).join(", ")}
+            </Text>
+          </Row>
+        )}
+      </Column>
+      <Column maxWidth="m">
+        <ScrollToHash />
+        <CustomMDX source={post.content} />
       </Column>
     </Column>
   );

@@ -13,10 +13,11 @@ import {
   LetterFx,
 } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
-import TableOfContents from "@/components/TableOfContents";
-import styles from "@/components/about/about.module.scss";
+import { TableOfContents } from "@/components/TableOfContents/TableOfContents";
+import styles from "./about.module.scss";
 import { person, about, social } from "@/app/resources/content";
 import { useMemo } from "react";
+import ClientDiscordPresence from "@/components/DiscordPresence/subcomponents/ClientDiscordPresence";
 
 export async function generateMetadata() {
   const title = about.title;
@@ -118,7 +119,7 @@ export default function About() {
             horizontal="center"
           >
             <GlitchFx>
-              <Avatar src={person.avatar} size="xl" />
+              <ClientDiscordPresence />
             </GlitchFx>
           </Column>
         )}

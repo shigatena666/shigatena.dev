@@ -1,0 +1,22 @@
+.masonryGrid {
+  display: flex;
+  width: 100%;
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+.masonryGridColumn {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-clip: padding-box;
+}
+
+.gridItem {
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+} 
