@@ -37,11 +37,6 @@ const social = [
     link: "https://www.linkedin.com/shigatena666",
   },
   {
-    name: "X",
-    icon: "x",
-    link: "https://x.com/anetagihs",
-  },
-  {
     name: "Email",
     icon: "email",
     link: "mailto:contact@shigatena.dev",
