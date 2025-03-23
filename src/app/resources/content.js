@@ -87,8 +87,18 @@ const about = {
         timeframe: "Sept 2024 - Present",
         role: "VOC, CTI & Automation expert",
         achievements: [
+          "Detection, monitoring, and remediation of group vulnerabilities/incidents",
+          "Configuration and improvement of security tools usage (YesWeHack, Hackuity, RecordedFuture, Ambionics, Bitsight, Hardenize...)",
+          "Improvement of infrastructure and operational efficiency (Python automation, databases...)",
+          "Reporting of key performance indicators (KPIs)",
         ],
         images: [
+          {
+            src: "/images/work/cnp_assurances/cnp_assurances.png",
+            alt: "Work image",
+            width: 16,
+            height: 9,
+          },
         ],
       },
       {
@@ -96,8 +106,19 @@ const about = {
         timeframe: "Sept 2021 - Aug 2024",
         role: "VOC, CTI & Automation",
         achievements: [
+          "Detection, monitoring, and remediation of group vulnerabilities/incidents",
+          "Configuration and improvement of security tools usage (YesWeHack, Hackuity, RecordedFuture, Ambionics, Bitsight, Hardenize...)",
+          "Improvement of infrastructure and operational efficiency (Python automation, databases...)",
+          "Reporting of key performance indicators (KPIs)",
         ],
-        images: [],
+        images: [
+          {
+            src: "/images/work/cnp_assurances/cnp_assurances.png",
+            alt: "Work image",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
       {
         company: "DaVinciCode",
@@ -105,15 +126,33 @@ const about = {
         role: "Member",
         achievements: [
         ],
-        images: [],
+        images: [
+          {
+            src: "/images/work/davincicode/davincicode.png",
+            alt: "Work image",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
       {
         company: "CalculIP",
         timeframe: "Apr 2021 - June 2021",
         role: "Web Development Intern",
         achievements: [
+          "Conducting in-depth case studies to meet project requirements",
+          "Reorganizing code into an MVC architecture, increasing application reliability and maintainability",
+          "Developing and improving exercises on network protocols (DHCP, DNS, IPv6), enhancing student users' understanding",
+          "Resolving XSS and IDOR vulnerabilities",
         ],
-        images: [],
+        images: [
+          {
+            src: "/images/work/USPN/uspn.png",
+            alt: "Work image",
+            width: 16,
+            height: 9,
+          },
+        ],
       },
     ],
   },
