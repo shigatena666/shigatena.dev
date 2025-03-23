@@ -292,6 +292,16 @@ const gallery = {
   ],
 };
 
+const newsletter = {
+  display: false,
+  title: "Subscribe to my newsletter",
+  description: "Get notified about new blog posts and projects.",
+  buttonText: "Subscribe",
+  placeholder: "Enter your email",
+  successMessage: "Thank you for subscribing!",
+  errorMessage: "Something went wrong. Please try again.",
+};
+
 const documentation = {
   label: "Documentation",
   title: "Documentation",
@@ -304,4 +314,4 @@ const availability = {
   notAvailableText: "Not available",
 }; 
 
-export { person, githubCalendar, social, home, about, blog, work, gallery, documentation, availability};
+export { person, githubCalendar, social, home, about, blog, work, gallery, newsletter, documentation, availability};
