@@ -1,4 +1,4 @@
-import { Column, Flex, Heading } from "@/once-ui/components";
+import { Column, Flex, Heading, Text } from "@/once-ui/components";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { getPosts } from "@/app/utils/utils";
@@ -65,8 +65,16 @@ export default function Blog() {
         {blog.title}
       </Heading>
       <Column fillWidth flex={1}>
-        <Posts range={[1, 3]} thumbnail type="documentation" posts={documentationPosts} />
-        <Posts range={[4]} columns="2" type="documentation" posts={documentationPosts} />
+        {documentationPosts.length > 0 ? (
+          <>
+            <Posts range={[1, 3]} thumbnail type="documentation" posts={documentationPosts} />
+            <Posts range={[4]} columns="2" type="documentation" posts={documentationPosts} />
+          </>
+        ) : (
+          <Text variant="body-default-m" onBackground="neutral-medium">
+            No documentation posts available yet. Please check back later.
+          </Text>
+        )}
       </Column>
       {newsletter.display && <Mailchimp newsletter={newsletter} />}
     </Column>

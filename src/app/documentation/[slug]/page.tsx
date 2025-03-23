@@ -16,10 +16,15 @@ interface BlogParams {
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const posts = getPosts(["src", "content", "documentation", "posts"]);
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  try {
+    const posts = getPosts(["src", "content", "documentation", "posts"]);
+    return posts.map((post) => ({
+      slug: post.slug,
+    }));
+  } catch (error) {
+    // Return empty array if no posts exist or there's an error
+    return [];
+  }
 }
 
 export function generateMetadata({ params: { slug } }: BlogParams) {
