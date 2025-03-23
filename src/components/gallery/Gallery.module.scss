@@ -1,0 +1,43 @@
+.masonryGrid {
+    display: flex;
+    margin-left: calc(-1 * var(--static-space-16));
+    width: 100%;
+}
+
+.masonryGridColumn {
+    padding-left: var(--static-space-16);
+    background-clip: padding-box;
+}
+
+.gridItem {
+    margin-bottom: var(--static-space-16);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.9;
+    }
+}
+
+.imagePopupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: var(--static-space-24);
+}
+
+.popupImage {
+    display: block;
+    max-width: 100%;
+    max-height: calc(100vh - 200px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}

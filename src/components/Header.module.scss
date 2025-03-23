@@ -1,0 +1,43 @@
+.position {
+    position: fixed;
+    bottom: var(--static-space-24);
+}
+
+.locationContainer {
+    width: 200px;
+    padding-left: var(--static-space-12);
+}
+
+.navigationContainer {
+    background: var(--surface-background);
+    border: 1px solid var(--neutral-border-medium);
+    box-shadow: var(--shadow-l);
+    padding: var(--static-space-4);
+    gap: var(--static-space-4);
+}
+
+.rightContainer {
+    width: 200px;
+    padding-right: var(--static-space-12);
+    gap: var(--static-space-20);
+}
+
+.tocContainer {
+    background: var(--surface-background);
+    border: 1px solid var(--neutral-border-medium);
+    box-shadow: var(--shadow-l);
+    padding: var(--static-space-4);
+}
+
+@media (--s) {
+    .position {
+        top: auto;
+        position: fixed;
+        bottom: var(--static-space-24);
+    }
+
+    .mask {
+        transform: rotate(180deg);
+        bottom: 0;
+    }
+}

