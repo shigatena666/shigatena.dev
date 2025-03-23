@@ -22,7 +22,7 @@ const style = {
   neutral: "gray",
   border: "conservative",
   solid: "color",
-  "solid-style": "flat",
+  solidStyle: "flat",
   surface: "translucent",
   transition: "all",
 };
