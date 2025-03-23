@@ -1,4 +1,4 @@
-# Shigatena.dev Portfolio
+# shigatena.dev
 
 A modern, responsive portfolio website.
 
