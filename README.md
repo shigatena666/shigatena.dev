@@ -1,0 +1,2 @@
+# shigatena.dev
+ 
