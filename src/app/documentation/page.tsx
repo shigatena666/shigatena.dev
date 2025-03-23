@@ -1,6 +1,7 @@
 import { Column, Flex, Heading } from "@/once-ui/components";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
+import { getPosts } from "@/app/utils/utils";
 import { baseURL } from "@/app/resources";
 import { blog, person, newsletter } from "@/app/resources/content";
 
@@ -34,6 +35,8 @@ export async function generateMetadata() {
 }
 
 export default function Blog() {
+  const documentationPosts = getPosts(["src", "content", "documentation", "posts"]);
+
   return (
     <Column maxWidth="s">
       <script
@@ -62,8 +65,8 @@ export default function Blog() {
         {blog.title}
       </Heading>
       <Column fillWidth flex={1}>
-        <Posts range={[1, 3]} thumbnail type="documentation" />
-        <Posts range={[4]} columns="2" type="documentation" />
+        <Posts range={[1, 3]} thumbnail type="documentation" posts={documentationPosts} />
+        <Posts range={[4]} columns="2" type="documentation" posts={documentationPosts} />
       </Column>
       {newsletter.display && <Mailchimp newsletter={newsletter} />}
     </Column>
