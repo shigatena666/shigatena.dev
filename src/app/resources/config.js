@@ -12,7 +12,7 @@ const routes = {
 // Enable password protection on selected routes
 // Set password in the .env file, refer to .env.example
 const protectedRoutes = {
-  "/work/anarchy": true,
+  "/work/anarchy": false,
 };
 
 const style = {
