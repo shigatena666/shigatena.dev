@@ -54,7 +54,7 @@ export default function Home() {
             "@type": "WebPage",
             name: home.title,
             description: home.description,
-            url: `https://${baseURL}`,
+            url: `https://${baseURL}/`,
             image: `${baseURL}/og?title=${encodeURIComponent(home.title)}`,
             publisher: {
               "@type": "Person",

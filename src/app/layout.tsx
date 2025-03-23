@@ -16,7 +16,7 @@ import { Analytics } from "@vercel/analytics/react"
 
 export async function generateMetadata() {
   return {
-    metadataBase: new URL(`https://${baseURL}`),
+    metadataBase: new URL(`https://${baseURL}/`),
     title: home.title,
     description: home.description,
     openGraph: {
