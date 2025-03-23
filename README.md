@@ -1,13 +1,13 @@
 # Shigatena.dev Portfolio
 
-A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS.
+A modern, responsive portfolio website.
 
 ## 🚀 Features
 
 - 📱 Fully responsive design
 - 🔍 SEO optimized
 - 📝 MDX support for content
-- 🎨 Custom UI components
+- 🎨 Once-UI components
 - 🌙 Dark mode
 
 ## 📦 Installation
