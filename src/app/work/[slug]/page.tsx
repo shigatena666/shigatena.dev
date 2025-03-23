@@ -6,6 +6,7 @@ import { baseURL } from "@/app/resources";
 import { person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
+import Link from "next/link";
 
 interface WorkParams {
   params: {
@@ -100,9 +101,15 @@ export default function Project({ params }: WorkParams) {
         }}
       />
       <Column maxWidth="xs" gap="16">
-        <Button href="/work" variant="tertiary" weight="default" size="s" prefixIcon="chevronLeft">
-          Projects
+      <Link href="/work" style={{ textDecoration: 'none' }}>
+        <Button 
+          variant="secondary" 
+          size="s"
+          data-surface="translucent"
+        >
+          ← Back to work posts
         </Button>
+      </Link>
         <Heading variant="display-strong-s">{post.metadata.title}</Heading>
       </Column>
       {post.metadata.images.length > 0 && (
