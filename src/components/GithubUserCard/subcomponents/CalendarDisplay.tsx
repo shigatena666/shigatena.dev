@@ -23,16 +23,11 @@ export const CalendarDisplay: FunctionComponent<CalendarDisplayProps> = ({
     blockMargin: 6,
     blockRadius: 7,
     maxLevel: 4,
-    hideTotalCount: true,
-    hideColorLegend: true,
+    hideTotalCount: false,
+    hideColorLegend: false,
   } as const
 
   return (
-    <Flex
-      margin="16"
-      style={isMobile ? { transform: 'scale(1.1)' } : undefined}
-    >
-      <Calendar {...commonProps} />
-    </Flex>
+    <Calendar {...commonProps} />
   )
 } 

@@ -54,10 +54,10 @@ export function selectLastNDays(contributions: Activity[], days: number) {
 
 export const githubCalendarTheme = {
   dark: [
-    'var(--neutral-background-weak)',
-    'var(--success-background-weak)',
-    'var(--success-background-medium)',
+    'var(--neutral-background-medium)',
     'var(--success-background-strong)',
-    'var(--success-solid-strong)',
+    'var(--success-solid-weak)',
+    'var(--success-solid-medium)',
+    'var(--success-solid-strong)', 
   ],
-} 
+}
