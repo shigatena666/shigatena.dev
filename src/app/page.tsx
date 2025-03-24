@@ -9,7 +9,7 @@ import { baseURL, routes } from "@/app/resources";
 import { home, person, githubCalendar } from "@/app/resources/content";
 import { availability } from "@/app/resources/content";
 import { Posts } from "@/components/Blog/Posts";
-import { GithubCalendar } from "@/components/GithubCalendar";
+import { GithubCalendar } from "@/components/GithubUserCard";
 
 export async function generateMetadata() {
   const title = home.title;

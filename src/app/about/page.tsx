@@ -17,7 +17,7 @@ import { TableOfContents } from "@/components/TableOfContents/TableOfContents";
 import styles from "./about.module.scss";
 import { person, about, social } from "@/app/resources/content";
 import { useMemo } from "react";
-import ClientDiscordPresence from "@/components/DiscordPresence/subcomponents/ClientDiscordPresence";
+import ClientDiscordPresence from "@/components/DiscordUserCard/subcomponents/ClientDiscordPresence";
 
 export async function generateMetadata() {
   const title = about.title;

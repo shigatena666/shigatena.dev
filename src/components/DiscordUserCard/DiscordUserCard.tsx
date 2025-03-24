@@ -4,12 +4,12 @@ import { useLanyard } from 'react-use-lanyard'
 import { Avatar, Column, Flex, Text } from '@/once-ui/components'
 import { useToast } from '@/once-ui/components/ToastProvider'
 
-interface DiscordPresenceProps {
+interface DiscordUserCardProps {
   userId?: string
   size?: 'xs' | 's' | 'm' | 'l' | 'xl'
 }
 
-export const DiscordPresence = ({ userId = '565228654854930455', size = 'l' }: DiscordPresenceProps) => {
+export const DiscordUserCard = ({ userId = '565228654854930455', size = 'l' }: DiscordUserCardProps) => {
   const { data: lanyard, isLoading } = useLanyard({ userId })
   const { addToast } = useToast()
 

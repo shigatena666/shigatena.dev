@@ -1,1 +1,0 @@
-export { GithubCalendar } from './GithubCalendar'; 
