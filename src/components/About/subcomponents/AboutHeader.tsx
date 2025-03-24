@@ -9,13 +9,11 @@ interface AboutHeaderProps {
 
 export const AboutHeader = ({ className }: AboutHeaderProps) => {
   return (
-    <Column fillWidth gap="l">
+    <Column>
       {about.avatar.display && (
         <Column
           className={styles.avatar}
           fillWidth
-          paddingX="l"
-          paddingBottom="xl"
           gap="m"
           horizontal="center"
         >
