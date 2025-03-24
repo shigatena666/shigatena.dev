@@ -1,6 +1,6 @@
 'use client'
 
-import { Skeleton } from '@/components/UI/skeleton'
+import { Skeleton } from '@/components/UI/Skeleton'
 import { type FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { Column, Flex, Text } from '@/once-ui/components'
 import { type ApiResponse } from '@/types/github-calendar'
