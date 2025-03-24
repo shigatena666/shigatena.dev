@@ -1,1 +1,1 @@
-export { default as MasonryGrid } from './MasonryGrid'; 
+export { MasonryGrid } from './MasonryGrid'; 
