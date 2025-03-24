@@ -32,7 +32,7 @@ export const GithubCalendar: FunctionComponent<GithubCalendarProps> = ({ usernam
     return (
       <Column horizontal="center" vertical="center" gap="16">
         <Text variant="label-default-s" onBackground="neutral-weak">
-          This component is down. Please email me!
+          Error fetching data. Please try again later.
         </Text>
       </Column>
     )

@@ -50,7 +50,6 @@ export const DiscordPresence = ({ userId = '565228654854930455', size = 'l' }: D
     user.avatar.startsWith('a_') ? 'gif' : 'png'
   }`
 
-  console.log(activities);
   const currentActivity = activities?.[0]
   const activityText = currentActivity ? (
     currentActivity.type === 2 ? // Spotify
