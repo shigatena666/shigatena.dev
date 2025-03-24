@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Badge, Button, Column, Heading, Row, SmartImage, Text } from "@/once-ui/components";
+import { AvatarGroup, Badge, Column, Flex, Heading, Row, SmartImage, Text, ToggleButton } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
-import { person } from "@/app/resources/content";
+import { blog, person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { TableOfContents } from "@/components/TableOfContents";
 import { useMemo } from "react";
-import Link from "next/link";
+import styles from "@/components/Header/styles/Header.module.scss";
 
 interface BlogParams {
   params: {
@@ -90,15 +90,20 @@ export default function Blog({ params }: BlogParams) {
 
   return (
     <Column maxWidth="m" gap="xl">
-      <Link href="/blog" style={{ textDecoration: 'none' }}>
-        <Button 
-          variant="secondary" 
-          size="s"
-          data-surface="translucent"
-        >
-          ← Back to Blog Posts
-        </Button>
-      </Link>
+      <Flex 
+        className={styles.navigationContainer}
+        horizontal="center"
+        radius="m-4"
+        fitWidth
+      >
+        <ToggleButton
+          prefixIcon="grid"
+          href="/blog"
+          label={"< " + blog.label}
+          selected={false}
+          variant="ghost"
+        />
+      </Flex>
       <script
         type="application/ld+json"
         suppressHydrationWarning

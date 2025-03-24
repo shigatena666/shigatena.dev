@@ -1,13 +1,13 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Badge, Button, Column, Flex, Heading, Row, SmartImage, Text } from "@/once-ui/components";
+import { AvatarGroup, Badge, Column, Heading, Row, SmartImage, Text, ToggleButton, Flex } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
-import { person } from "@/app/resources/content";
+import { work, person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import { ScrollToHash } from "@/components/ScrollToHash";
-import Link from "next/link";
 import { useMemo } from "react";
+import styles from "@/components/Header/styles/Header.module.scss";
 
 interface WorkParams {
   params: {
@@ -89,15 +89,20 @@ export default function Project({ params }: WorkParams) {
 
   return (
     <Column maxWidth="m" gap="xl">
-      <Link href="/work" style={{ textDecoration: 'none' }}>
-        <Button 
-          variant="secondary" 
-          size="s"
-          data-surface="translucent"
-        >
-          ← Back to work posts
-        </Button>
-      </Link>
+      <Flex 
+        className={styles.navigationContainer}
+        horizontal="center"
+        radius="m-4"
+        fitWidth
+      >
+        <ToggleButton
+          prefixIcon="grid"
+          href="/work"
+          label={"< " + work.label}
+          selected={false}
+          variant="ghost"
+        />
+      </Flex>
       <script
         type="application/ld+json"
         suppressHydrationWarning
