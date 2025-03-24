@@ -5,7 +5,7 @@ import Masonry from "react-masonry-css";
 import { SmartImage, TiltFx, useToast } from "@/once-ui/components";
 import styles from "./Gallery.module.scss";
 import { gallery } from "@/app/resources/content";
-import { ImagePopup } from "./ImagePopup";
+import { ImagePopup } from '@/components/Gallery/ImagePopup';
 
 interface SelectedImage {
   src: string;
