@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Column, Flex, Text, Dialog, IconButton, Background } from "@/once-ui/components";
-import styles from "./TableOfContents.module.scss";
+import styles from "./styles/TableOfContents.module.scss";
 
 interface BlogHeading {
   id: string;
@@ -57,7 +57,7 @@ const ListItem = ({
     <Text 
       variant="body-default-s"
       style={{ 
-        color: isActive ? 'var(--scheme-green-600)' : undefined,
+        color: isActive ? 'var(--scheme-green-600)' : 'var(--scheme-black-700)',
         fontWeight: isActive ? 600 : undefined
       }}
     >

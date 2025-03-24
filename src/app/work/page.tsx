@@ -1,6 +1,6 @@
 import { getPosts } from "@/app/utils/utils";
 import { Column, Heading, LetterFx } from "@/once-ui/components";
-import { Projects } from "@/components/Work/Projects";
+import { Projects } from "@/components/Projects/Projects";
 import { baseURL } from "@/app/resources";
 import { person, work } from "@/app/resources/content";
 

@@ -1,5 +1,5 @@
 import { Flex, Text } from "@/once-ui/components";
-import styles from "../TableOfContents.module.scss";
+import styles from "../styles/TableOfContents.module.scss";
 
 interface ListItemProps {
   text: string;

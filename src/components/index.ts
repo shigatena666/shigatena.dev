@@ -5,7 +5,6 @@ export { TableOfContents } from './TableOfContents/TableOfContents';
 export { ProjectCard } from './ProjectCard/ProjectCard';
 export { Availability } from './Availability/Availability';
 export { HeadingLink } from './HeadingLink/HeadingLink';
-export { Mailchimp } from './Mailchimp/Mailchimp';
 export { ScrollToHash } from './ScrollToHash/ScrollToHash';
 export { RouteGuard } from './RouteGuard/RouteGuard';
 export { GithubCalendar } from './GithubUserCard/GithubUserCard';

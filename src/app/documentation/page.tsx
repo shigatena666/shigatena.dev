@@ -1,5 +1,4 @@
 import { Column, Flex, Heading, Text } from "@/once-ui/components";
-import { Mailchimp } from "@/components";
 import { Posts } from "@/components/BlogContent/subcomponents/Posts";
 import { getPosts } from "@/app/utils/utils";
 import { baseURL } from "@/app/resources";
@@ -76,7 +75,6 @@ export default function Blog() {
           </Text>
         )}
       </Column>
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
     </Column>
   );
 }

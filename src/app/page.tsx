@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Heading, Flex, Text, Button, Avatar, Arrow, Column, LetterFx } from "@/once-ui/components";
-import { Projects } from "@/components/Work/Projects";
+import { Projects } from "@/components/Projects/Projects";
 import { Availability } from "@/components/Availability/Availability";
 import { getPosts } from "@/app/utils/utils";
 
