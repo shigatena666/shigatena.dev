@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Masonry from "react-masonry-css";
-import { SmartImage, RevealFx, TiltFx, useToast } from "@/once-ui/components";
+import { SmartImage, TiltFx, useToast } from "@/once-ui/components";
 import styles from "./Gallery.module.scss";
 import { gallery } from "@/app/resources/content";
-import ImagePopup from "./ImagePopup";
+import ImagePopup from "./ImagePopup/ImagePopup";
 
 interface SelectedImage {
   src: string;
@@ -13,7 +13,7 @@ interface SelectedImage {
   orientation: string;
 }
 
-export default function MasonryGrid() {
+export function MasonryGrid() {
   const [selectedImage, setSelectedImage] = useState<SelectedImage | null>(null);
   const { addToast } = useToast();
 
