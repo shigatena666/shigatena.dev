@@ -1,1 +1,1 @@
-export { default as ImagePopup } from './ImagePopup'; 
+export { ImagePopup } from './ImagePopup'; 
