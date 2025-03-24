@@ -1,13 +1,12 @@
 import { notFound } from "next/navigation";
 import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
-import { AvatarGroup, Badge, Button, Column, Flex, Heading, Row, SmartImage, Text } from "@/once-ui/components";
+import { AvatarGroup, Badge, Button, Column, Heading, Row, SmartImage, Text } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
-import { about, person } from "@/app/resources/content";
+import { person } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { TableOfContents } from "@/components/TableOfContents";
-import styles from "@/components/about/about.module.scss";
 import { useMemo } from "react";
 import Link from "next/link";
 

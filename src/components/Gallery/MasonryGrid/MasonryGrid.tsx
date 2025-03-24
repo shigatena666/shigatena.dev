@@ -5,7 +5,7 @@ import Masonry from "react-masonry-css";
 import { SmartImage, RevealFx, TiltFx, useToast } from "@/once-ui/components";
 import { gallery } from "@/app/resources/content";
 import { type MasonryGridProps, type SelectedImage } from '../types';
-import ImagePopup from '../ImagePopup';
+import { ImagePopup } from '../ImagePopup';
 import styles from './MasonryGrid.module.scss';
 
 const MasonryGrid = () => {
