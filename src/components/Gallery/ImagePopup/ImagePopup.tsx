@@ -5,7 +5,7 @@ import { useState } from "react";
 import { type ImagePopupProps } from '../types';
 import styles from './ImagePopup.module.scss';
 
-const ImagePopup = ({ src, alt, orientation, onClose, onDownloadComplete }: ImagePopupProps) => {
+export function ImagePopup({ src, alt, orientation, onClose, onDownloadComplete }: ImagePopupProps) {
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
@@ -86,6 +86,4 @@ const ImagePopup = ({ src, alt, orientation, onClose, onDownloadComplete }: Imag
       </Flex>
     </div>
   );
-};
-
-export default ImagePopup; 
+} 

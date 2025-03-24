@@ -1,1 +1,1 @@
-export { default as DiscordPresence } from './DiscordPresence'; 
+export { DiscordPresence } from './DiscordPresence'; 
