@@ -8,7 +8,7 @@ import { getPosts } from "@/app/utils/utils";
 import { baseURL, routes } from "@/app/resources";
 import { home, person, githubCalendar } from "@/app/resources/content";
 import { availability } from "@/app/resources/content";
-import { Posts } from "@/components/Blog/Posts";
+import { Posts } from "@/components/BlogContent/subcomponents/Posts";
 import { GithubCalendar } from "@/components/GithubUserCard";
 
 export async function generateMetadata() {

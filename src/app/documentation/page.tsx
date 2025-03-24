@@ -1,6 +1,6 @@
 import { Column, Flex, Heading, Text } from "@/once-ui/components";
 import { Mailchimp } from "@/components";
-import { Posts } from "@/components/Blog/Posts";
+import { Posts } from "@/components/BlogContent/subcomponents/Posts";
 import { getPosts } from "@/app/utils/utils";
 import { baseURL } from "@/app/resources";
 import { blog, person, newsletter } from "@/app/resources/content";

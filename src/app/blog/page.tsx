@@ -2,7 +2,7 @@ import { Column } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
 import { blog, person } from "@/app/resources/content";
 import { getPosts } from "@/app/utils/utils";
-import { BlogContent } from "./BlogContent";
+import { BlogContent } from "@/components/BlogContent/BlogContent";
 
 export async function generateMetadata() {
   const title = blog.title;

@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBadge } from "./StatusBadge";
+import { StatusBadge } from "./subcomponents/StatusBadge";
 
 interface AvailabilityProps {
   isAvailable: boolean;

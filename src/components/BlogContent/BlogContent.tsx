@@ -1,7 +1,7 @@
 "use client";
 
 import { Column, Flex, Heading, LetterFx, Input, Icon, Select } from "@/once-ui/components";
-import { Posts } from "@/components/Blog/Posts/Posts";
+import { Posts } from "@/components/BlogContent/subcomponents/Posts";
 import { blog } from "@/app/resources/content";
 import { useState, useMemo } from "react";
 

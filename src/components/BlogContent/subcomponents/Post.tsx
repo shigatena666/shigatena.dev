@@ -3,7 +3,7 @@
 import { Badge, Card, Column, Icon, LetterFx, Line, Row, Scroller, SmartImage, SmartLink, Text } from "@/once-ui/components";
 import { formatDate } from "@/app/utils/formatDate";
 import { type PostProps } from '../types';
-import styles from './Post.module.scss';
+import styles from '../styles/Post.module.scss';
 
 export function Post({ post, thumbnail }: PostProps) {
   const tags = post.metadata.tag ? (post.metadata.tag.includes(",") ? post.metadata.tag.split(",") : [post.metadata.tag]) : [];
