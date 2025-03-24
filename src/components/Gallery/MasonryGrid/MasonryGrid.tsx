@@ -8,7 +8,7 @@ import { type MasonryGridProps, type SelectedImage } from '../types';
 import { ImagePopup } from '../ImagePopup';
 import styles from './MasonryGrid.module.scss';
 
-const MasonryGrid = () => {
+export const MasonryGrid = () => {
   const [selectedImage, setSelectedImage] = useState<SelectedImage | null>(null);
   const { addToast } = useToast();
 
@@ -65,6 +65,4 @@ const MasonryGrid = () => {
       )}
     </>
   );
-};
-
-export default MasonryGrid; 
+}; 
