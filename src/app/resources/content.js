@@ -220,8 +220,8 @@ const blog = {
   // All posts will be listed on the /blog route
 };
 
-const projects = {
-  label: "Projects",
+const work = {
+  label: "Work",
   title: "Projects",
   description: `Cybersecurity and dev projects by ${person.name}`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
@@ -314,4 +314,4 @@ const availability = {
   notAvailableText: "Not available",
 }; 
 
-export { person, githubCalendar, social, home, about, blog, projects as work, gallery, newsletter, documentation, availability};
+export { person, githubCalendar, social, home, about, blog, work, gallery, newsletter, documentation, availability};
