@@ -49,7 +49,7 @@ export const DiscordUserCard = ({ userId = '565228654854930455', size = 'l' }: D
   const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${
     user.avatar.startsWith('a_') ? 'gif' : 'png'
   }`
-
+  
   const currentActivity = activities?.[0]
   const activityText = currentActivity ? (
     currentActivity.type === 2 ? // Spotify
@@ -60,6 +60,8 @@ export const DiscordUserCard = ({ userId = '565228654854930455', size = 'l' }: D
       `Streaming ${currentActivity.details}` :
     currentActivity.type === 3 ? // Watching
       `Watching ${currentActivity.name}` :
+    currentActivity.type === 4 ? // Custom status
+      `${currentActivity.state}` :
     currentActivity.type === 5 ? // Competing
       `Competing in ${currentActivity.name}` :
     null
