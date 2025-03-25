@@ -89,6 +89,34 @@ export const Header = () => {
         <Flex className={styles.locationContainer} vertical="center" textVariant="body-default-s">
           {display.location && <Flex hide="s">{person.location}</Flex>}
         </Flex>
+        {showToc && (
+            <Flex horizontal="center">
+              <Flex 
+                className={styles.navigationContainer}
+                horizontal="center"
+                radius="m-4"
+              >
+                <ToggleButton
+                  className="s-flex-hide"
+                  prefixIcon="eye"
+                  selected={isTocOpen}
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent('toggleToc'));
+                    setIsTocOpen(prev => !prev);
+                  }}
+                />
+                <ToggleButton
+                  className="s-flex-show"
+                  prefixIcon="eye"
+                  selected={isTocOpen}
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent('toggleToc'));
+                    setIsTocOpen(prev => !prev);
+                  }}
+                />
+              </Flex>
+            </Flex>
+          )}
         <Flex horizontal="center">
           <Flex className={styles.navigationContainer} horizontal="center" radius="m-4">
             {routes["/"] && (
@@ -184,15 +212,7 @@ export const Header = () => {
             )}
           </Flex>
         </Flex>
-        <Flex
-          className={styles.rightContainer}
-          horizontal="end"
-          vertical="center"
-          textVariant="body-default-s"
-          gap="8"
-        >
-          <Flex hide="s">{display.time && <TimeDisplay timeZone={person.location} />}</Flex>
-          <Flex horizontal="center">
+        <Flex horizontal="center">
             <Flex className={styles.navigationContainer} horizontal="center" radius="m-4">
               <DropdownWrapper
                 floatingPlacement="top"
@@ -221,34 +241,14 @@ export const Header = () => {
               />
             </Flex>
           </Flex>
-          {showToc && (
-            <Flex horizontal="center">
-              <Flex 
-                className={styles.navigationContainer}
-                horizontal="center"
-                radius="m-4"
-              >
-                <ToggleButton
-                  className="s-flex-hide"
-                  prefixIcon="eye"
-                  selected={isTocOpen}
-                  onClick={() => {
-                    window.dispatchEvent(new CustomEvent('toggleToc'));
-                    setIsTocOpen(prev => !prev);
-                  }}
-                />
-                <ToggleButton
-                  className="s-flex-show"
-                  prefixIcon="eye"
-                  selected={isTocOpen}
-                  onClick={() => {
-                    window.dispatchEvent(new CustomEvent('toggleToc'));
-                    setIsTocOpen(prev => !prev);
-                  }}
-                />
-              </Flex>
-            </Flex>
-          )}
+        <Flex
+          className={styles.rightContainer}
+          horizontal="end"
+          vertical="center"
+          textVariant="body-default-s"
+          gap="8"
+        >
+          <Flex hide="s">{display.time && <TimeDisplay timeZone={person.location} />}</Flex>
         </Flex>
       </Flex>
     </>
