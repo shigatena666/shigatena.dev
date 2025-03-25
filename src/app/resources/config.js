@@ -46,8 +46,8 @@ const effects = {
     opacity: 50,
   },
   dots: {
-    display: false,
-    size: 32,
+    display: true,
+    size: 16,
     color: "neutral-alpha-weak",
     opacity: 100,
   },
@@ -57,7 +57,7 @@ const effects = {
     opacity: 100,
   },
   grid: {
-    display: true,
+    display: false,
     color: "neutral-alpha-weak",
     opacity: 40,
   },
