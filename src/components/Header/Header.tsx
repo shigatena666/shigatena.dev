@@ -84,6 +84,7 @@ export const Header = () => {
         fillWidth
         padding="8"
         horizontal="center"
+        gap="16"
       >
         <Flex className={styles.locationContainer} vertical="center" textVariant="body-default-s">
           {display.location && <Flex hide="s">{person.location}</Flex>}

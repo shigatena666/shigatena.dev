@@ -47,8 +47,8 @@ const effects = {
   },
   dots: {
     display: false,
-    size: 2,
-    color: "brand-on-background-weak",
+    size: 32,
+    color: "neutral-alpha-weak",
     opacity: 100,
   },
   lines: {
